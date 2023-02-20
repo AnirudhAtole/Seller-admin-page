@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <div class="p-5 text-center bg-light">
+        <h1>Seller admin page</h1>
+        <p>Sold items amount , name and its category</p> 
+      </div>
+    
+      <form class="p-5 text-center" id="my-form">
+        <div class="mb-3">
+            <label for = "item" class="form-label">Item name</label>
+            <input type="text" class="form-control" id = "item"> 
+        </div>
+
+        <div class="mb-3">
+            <label for = "amount" class="form-label">amount</label>
+            <input type="text" class="form-control" id = "amount"> 
+        </div>
+        <div class="mb-3">
+            <label for = "category" class="form-label">Category</label>
+            <select class="form-select" aria-label="Default select example" id ="category">
+                <option value="Electronics" >Electronics</option>
+                <option value="Skincare" >Skincare</option>
+                <option value="Food items">Food items</option>
+              </select>
+        </div>
+        <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+      </form>
+
+      <h1 class="text-center">Electronics Items</h1>
+      <ul class="list-group list-group-light list-group-small text-center" id="elec-list"> </ul>
+      <h1 class="text-center">Food Items</h1>
+      <ul class="list-group list-group-light list-group-small text-center" id="food-list"> </ul>
+      <h1 class="text-center">Skincare Items</h1>
+      <ul class="list-group list-group-light list-group-small text-center" id="skin-list"> </ul>
+
+      <script src="main.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.3/axios.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
