@@ -1,3 +1,4 @@
+crud_add = "https://crudcrud.com/api/75bd461db5d44b5895d3aa1cc27fcbdd/seller"
 let form = document.getElementById('my-form');
 let elec = document.getElementById('elec-list');
 let food = document.getElementById('food-list');
@@ -40,16 +41,30 @@ function showExpenses(user){
     }
 }
 
+async function showallUsers(){
+    try{
+        let response = await axios.get(crud_add);
+        response.data.forEach(entry => showExpenses(entry));
+    }
+    catch(err){
+        console.log(err);
+    }
+}
 window.addEventListener("DOMContentLoaded" , ()=>{
-    axios.get('https://crudcrud.com/api/b85c81892afd4bc2a19bd8cbdf45baa2/expanse')
-    .then(res => {
-        res.data.forEach(entry => showExpenses(entry));
-    })
-    .catch((err) => {
-        console.log(err)
-    })
+    showallUsers();
 })
 
+
+async function storeDetailsTocrud(user){
+    try{
+        let response = await axios.post(crud_add,user);
+        user._id = response.data._id;
+        showExpenses(user);
+    }
+    catch(err){
+        console.log(err)
+    }
+}
 
 function storeDetails(e){
     e.preventDefault();
@@ -57,27 +72,26 @@ function storeDetails(e){
     user.item = document.getElementById('item').value;
     user.amount = document.getElementById('amount').value;
     user.category = document.getElementById('category').value;
-
-    axios.post('https://crudcrud.com/api/b85c81892afd4bc2a19bd8cbdf45baa2/expanse',user)
-    .then((response)=>{
-        user._id = response.data._id;
-        showExpenses(user);
-    })
-    .catch(err => console.log(err));
+    storeDetailsTocrud(user);
     
+}
+
+async function deleteUser(li,id){
+    try{
+        let response = await axios.delete(`${crud_add}/${id}`);
+        let paren = li.parentElement;
+        console.log(response);
+        paren.removeChild(li);
+    }
+    catch(err){
+        console.log(err);
+    }
 }
 
 function removeUser(e){
     if(e.target.classList.contains('btn-danger')){
         let li = e.target.parentElement;
-        let paren = li.parentElement;
         const id = li.children[1].innerText;
-
-        axios.delete(`https://crudcrud.com/api/b85c81892afd4bc2a19bd8cbdf45baa2/expanse/${id}`)
-        .then((response)=>{
-            console.log(response);
-            paren.removeChild(li);
-        })
-        .catch((err)=> console.log(err)); 
+        deleteUser(li,id);
     }
 }
